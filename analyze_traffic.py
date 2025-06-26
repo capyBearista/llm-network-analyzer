@@ -1,11 +1,39 @@
 #!/usr/bin/env python3
-import ollama
-import argparse
-import sys
-import json
+import ollama      # communicate with ollama
+import argparse    # parse command line arguments
+import json        # JSON functions
+import yaml        # enable loading of config.yaml
+import os          # enable checking for config.yaml
 
 # --- Configuration ---
-MODEL_NAME = 'deepseek-r1:7b'
+# tbd, check for what default to use
+DEFAULT_CONFIG = {
+    'model_name': 'deepseek-r1:7b',
+    'ollama_endpoint': 'http://localhost:11434'
+}
+
+def load_config(config_path='config.yaml'):
+    """Load configuration from a YAML file, with defaults and error handling."""
+    config = DEFAULT_CONFIG.copy()
+    if not os.path.exists(config_path):
+        print(f"Warning: {config_path} not found. Using default configuration.")
+        return config
+    try:
+        with open(config_path, 'r') as f:
+            user_config = yaml.safe_load(f) or {}
+            config.update(user_config)
+    except Exception as e:
+        print(f"Error loading {config_path}: {e}. Using default configuration.")
+    return config
+
+# setting var names from config.yaml
+config = load_config()
+MODEL_NAME = config['model_name']
+OLLAMA_ENDPOINT = config['ollama_endpoint']
+
+# import ollama
+# ollama.base_url = OLLAMA_ENDPOINT
+import ollama
 
 def generate_system_prompt():
     """Creates the initial instruction for the LLM."""

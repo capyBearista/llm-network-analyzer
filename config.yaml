@@ -1,1 +1,2 @@
- 
+model_name: deepseek-r1:7b
+ollama_endpoint: http://localhost:11434
