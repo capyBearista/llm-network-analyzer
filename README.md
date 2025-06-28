@@ -18,7 +18,7 @@ This project analyzes Suricata `eve.json` network logs using a local Large Langu
 (Long log files will take a LOT of time. Especially on less capable models and hardware, I highly recommend using a shorter file or a limited segment of the log.)
 
 ## Requirements
-- Python 3.8+
+- Python 3.6+
 - [Ollama](https://ollama.com/) running locally
 - Suricata logs in `eve.json` format
 
