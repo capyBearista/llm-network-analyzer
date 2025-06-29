@@ -1,5 +1,7 @@
 #!/bin/bash
 # This script runs the Python analyzer using the correct virtual environment.
+# This file exists to make it easier to run the analyzer from the command line.
+# Otherwise, you'd have to boot up the virtual environment to run it.
 
 # Find the absolute path of the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
@@ -24,8 +26,6 @@ if [ -z "$1" ]; then
 fi
 # --- End Error Checking ---
 
-
-# Announce what's happening
 echo "🚀 Running analysis using the project's virtual environment..."
 
 # Execute the python script with the correct interpreter, passing along
