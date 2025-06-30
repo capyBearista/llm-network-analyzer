@@ -15,7 +15,7 @@ This project analyzes Suricata `eve.json` network logs using a local Large Langu
    ```
 3. The script will print a summary to the console.
 
-(Long log files will take a LOT of time. Especially on less capable models and hardware, I highly recommend using a shorter file or a limited segment of the log.)
+Note: The script is set to analyze only the last 100 lines.
 
 ## Requirements
 - Python 3.6+

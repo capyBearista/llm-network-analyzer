@@ -6,7 +6,7 @@ import yaml        # enable loading of config.yaml
 import os          # enable checking for config.yaml
 
 # --- Configuration ---
-# tbd, check for what default to use
+# Default config values if config.yaml is missing or incomplete
 DEFAULT_CONFIG = {
     'model_name': 'deepseek-r1:7b',
     'ollama_endpoint': 'http://localhost:11434'
@@ -26,7 +26,7 @@ def load_config(config_path='config.yaml'):
         print(f"Error loading {config_path}: {e}. Using default configuration.")
     return config
 
-# setting var names from config.yaml
+# Load config and set model/endpoint variables
 config = load_config()
 MODEL_NAME = config['model_name']
 OLLAMA_ENDPOINT = config['ollama_endpoint']
@@ -34,6 +34,7 @@ OLLAMA_ENDPOINT = config['ollama_endpoint']
 # import ollama
 # ollama.base_url = OLLAMA_ENDPOINT
 import ollama
+
 
 def generate_system_prompt():
     """Creates the initial instruction for the LLM."""
@@ -48,6 +49,7 @@ def generate_system_prompt():
     If the logs appear normal and uninteresting, state that clearly.
     """
 
+
 def parse_eve_log(log_content: str):
     """Parses the raw eve.json lines and extracts key information."""
     parsed_events = []
@@ -57,6 +59,7 @@ def parse_eve_log(log_content: str):
             event_type = event.get('event_type')
             summary = f"[{event.get('timestamp')}] "
 
+            # Extract and summarize DNS, HTTP, and alert events
             if event_type == 'dns':
                 query = event.get('dns', {}).get('rrname', 'N/A')
                 summary += f"DNS Query for: {query}"
@@ -74,16 +77,17 @@ def parse_eve_log(log_content: str):
                 parsed_events.append(summary)
 
         except json.JSONDecodeError:
-            continue
+            continue  # Skip lines that are not valid JSON
 
     return "\n".join(parsed_events)
+
 
 def analyze_log_content(formatted_log_data: str):
     """Sends the formatted log data to the Ollama API for analysis."""
     if not formatted_log_data:
         return "No relevant DNS, HTTP, or Alert events found in the log sample."
 
-    print(f"🤖 Contacting LLM ({MODEL_NAME})... Please wait.")
+    print(f"🤖 Contacting LLM ({MODEL_NAME})... Please hold, this might take a while!")
     try:
         response = ollama.chat(
             model=MODEL_NAME,
@@ -96,6 +100,7 @@ def analyze_log_content(formatted_log_data: str):
     except Exception as e:
         return f"Error contacting Ollama API: {e}"
 
+
 def main():
     """Main function to run the script."""
     parser = argparse.ArgumentParser(description="Analyze a Suricata eve.json log file using a local LLM.")
@@ -106,10 +111,10 @@ def main():
         print(f"📖 Reading log file: {args.logfile}")
         with open(args.logfile, 'r') as f:
             lines = f.readlines()
-            log_chunk = "".join(lines[-100:])
+            log_chunk = "".join(lines[-100:])  # Only analyze the last 100 lines for efficiency
 
-        formatted_data = parse_eve_log(log_chunk)
-        analysis = analyze_log_content(formatted_data)
+        formatted_data = parse_eve_log(log_chunk)  # Extract relevant events
+        analysis = analyze_log_content(formatted_data)  # Get LLM analysis
 
         print("\n--- 🕵️ LLM Analysis Report ---")
         print(analysis)
