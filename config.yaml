@@ -1,2 +1,11 @@
+# Configuration file for analyze_traffic.py
+#
+# You can change these values to customize how the analyzer works.
+# Lines starting with '#' are comments and will be ignored by the program.
+#
+# The name of the LLM model to use with Ollama (e.g., deepseek-r1:7b, llama2, phi3, etc.). They should be EXACTLY as they appear in Ollama CLI.
 model_name: deepseek-r1:7b
+
+# The URL where the Ollama server is running.
+# Default is local machine; change if using a remote server or different port.
 ollama_endpoint: http://localhost:11434
