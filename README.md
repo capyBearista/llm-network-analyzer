@@ -9,11 +9,12 @@ This project analyzes Suricata `eve.json` network logs using a local Large Langu
 
 ## Usage
 1. Place your Suricata `eve.json` log file in a known location.
-2. Run the analyzer:
+2. Configure the desired model name and endpoint in `config.yaml`.
+3. Run the analyzer:
    ```bash
    ./run_analyzer.sh /path/to/eve.json
    ```
-3. The script will print a summary to the console.
+4. The script will print a summary to the console.
 
 Note: The script is set to analyze only the last 100 lines.
 
@@ -25,5 +26,5 @@ Note: The script is set to analyze only the last 100 lines.
 ## Project Structure
 - `analyze_traffic.py`: Main CLI tool
 - `run_analyzer.sh`: Shell wrapper for easy execution
-- `config.yaml`: (To be implemented) Configuration file for model and API settings
+- `config.yaml`: Configuration file for model and API settings
 - `tests/`: Directory for test logs and future test scripts 
