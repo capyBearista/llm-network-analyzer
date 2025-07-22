@@ -31,11 +31,6 @@ config = load_config()
 MODEL_NAME = config['model_name']
 OLLAMA_ENDPOINT = config['ollama_endpoint']
 
-# import ollama
-# ollama.base_url = OLLAMA_ENDPOINT
-import ollama
-
-
 def generate_system_prompt():
     """Creates the initial instruction for the LLM."""
     return """
