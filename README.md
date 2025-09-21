@@ -2,14 +2,14 @@
 
 *Analyze Suricata network logs with a local LLM for instant, human-readable security insights.*
 
-### 🛜 How it works
+### How it works
 - Parses Suricata `eve.json` logs for relevant events
 - Formats the data and sends it to a local LLM (Ollama)
 - Outputs a human-readable summary of network activity and potential threats
 
 Note: The script is set to analyze only the last 100 lines.
 
-### 🚀 Quick Start
+### Quick Start
 
 1. Clone the repo:
    ```bash
@@ -35,7 +35,7 @@ Note: The script is set to analyze only the last 100 lines.
 6. Enjoy! (...or be concerned if the LLM picks up issues)
 
 
-### 🛠️ Requirements
+### 🛠Requirements
 
 - Python 3.6+
 - [Ollama](https://ollama.com/) running locally
@@ -43,7 +43,7 @@ Note: The script is set to analyze only the last 100 lines.
 - wip - some other things ;-;
 
 
-### 📁 Project Structure
+### Project Structure
 
 | File/Folder         | Purpose                                      |
 |---------------------|----------------------------------------------|
