@@ -35,7 +35,7 @@ Note: The script is set to analyze only the last 100 lines.
 6. Enjoy! (...or be concerned if the LLM picks up issues)
 
 
-### 🛠Requirements
+### Requirements
 
 - Python 3.6+
 - [Ollama](https://ollama.com/) running locally
@@ -53,7 +53,7 @@ Note: The script is set to analyze only the last 100 lines.
 | `tests/`            | Test logs and (future) test scripts          |
 
 
-## ❓ Need help?
+## Need help?
 
 - wip - Check the [FAQ](#)
 - Or [open an issue](https://github.com/yourname/llm-network-analyzer/issues)
